@@ -179,6 +179,22 @@ public class MainTreeRunner {
 		root.printHorizontal("", true);
 	}
 
+	public static void findFloorAndCeilinginBST() {
+		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(5, 10, 999);
+		root.printHorizontal("", true);
+		
+		// find a random node 
+		double markerValue =  (root.getRightNode().getLeftNode().getData()+root.getRightNode().getRightNode().getData())/2;
+		
+		TreeNode<Long> floor=null;
+		TreeNode<Long> ceiling=null;
+		
+		TreeUtility.identifyFloorAndCeiling(root , floor,ceiling ,markerValue);
+		
+		
+		
+	}
+	
 
 
 }

@@ -334,6 +334,12 @@ public class TreeUtility {
 		
 		return rootNode;
 	}
+
+	public static void identifyFloorAndCeiling(TreeNode<Long> root, TreeNode<Long> floor, TreeNode<Long> ceiling,
+			double markerValue) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
