@@ -22,7 +22,7 @@ public abstract  class TreeLevelOrderTraversalHandler {
 
 	/**
 	 * 
-	 * Tree traversal by level , prints elements at individual levels 
+	 * Tree traversal by level , process elements at individual levels 
 	 * @param root
 	 */
 	public  void levelOrderTreeTraversal(TreeNode<Long> root, Map<String, Object> associatedData) {

@@ -36,6 +36,14 @@ public class TreeCreationUtil {
 		return node;
 	}
 
+	/**
+	 * Creates binary search tree with uniqu values 
+	 * 
+	 * @param height
+	 * @param lowerRange
+	 * @param upperRange
+	 * @return
+	 */
 	public static TreeNode createBinarySearchTreeForFixedHeight(int height, long lowerRange, long upperRange) {
 		// get a number between the range
 		long dataValue = RandomGenerationUtils.randomLongBetweenLimits(lowerRange, upperRange);
@@ -44,7 +52,7 @@ public class TreeCreationUtil {
 		if (height > 0) {
 			// create a tree with values less then datavalue, use it for left
 			// sub tree
-			TreeNode leftNode = createBinarySearchTreeForFixedHeight(height - 1, lowerRange, dataValue - 1);
+			TreeNode leftNode = createBinarySearchTreeForFixedHeight(height - 1, lowerRange, dataValue );
 			// create a tree with values more then datavalue, use it for right
 			// sub tree
 			TreeNode rightNode = createBinarySearchTreeForFixedHeight(height - 1, dataValue + 1, upperRange);

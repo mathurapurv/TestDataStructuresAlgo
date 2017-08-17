@@ -35,6 +35,7 @@ public class RandomGenerationUtils {
 
 	/**
 	 * return a random long number between 2 limits
+	 * lower limit inclusive , upper limit exclusive
 	 * 
 	 * @param lowerLimit
 	 * @param upperLimit

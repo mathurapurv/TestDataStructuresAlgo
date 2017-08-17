@@ -2,6 +2,7 @@ package com.apurv.datastructure.tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +18,13 @@ public class MainTreeRunner {
 //		 findMaxInBinaryTree();
 //		 levelOrderTreeTraversal();
 //		 findMaxandMinDepth();
+		tryPreOrderTreeTraversal();
 //		 rootToLeafPaths();
-//		 mirrorTree();
+//		 mirrorTree(); 
 //		 pathFromRootToNode();
 //		levelOrderTreeTraversal();
 //		findLCAofTwoBSTNodes();
-		createBSTFromSortedList();
+//		createBSTFromSortedList();
 		System.out.println("-- End --");
 
 	}
@@ -118,6 +120,30 @@ public class MainTreeRunner {
 		System.out.println("Max depth of leaf : "+associatedData.get(MAXIMUM_DEPTH)  + " With data : "+associatedData.get(MAXIMUM_DEPTH_DATA));
 	} 
 	
+	public static void tryPreOrderTreeTraversal() {
+		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(10, 10, 999);
+		root.printHorizontal("", true);
+		Map<String, Object> associatedData = new HashMap<String, Object>();
+		List<Long> sortedNumberList = new LinkedList<>();
+		associatedData.put("sortedNumberList", sortedNumberList);
+		
+		(new TreePreOrderTraversalHandler() {
+			
+			@Override
+			protected void processNode(TreeNode<Long> node, int level, Map<String, Object> associatedData) {
+				((List<Long>)associatedData.get("sortedNumberList")).add(node.getData());
+				
+			}
+		}).preOrderTreeTraversal(root, associatedData);
+		
+		
+		
+		for( Long l :  (List<Long>)associatedData.get("sortedNumberList")){
+			System.out.print(l+" --> ");
+		}
+		
+	}
+	
 	
 	/**
 	 * print all root to leaf paths 
@@ -178,6 +204,9 @@ public class MainTreeRunner {
 		TreeNode<Long> root = TreeUtility.createBSTfromSortedList(sortedNumberList);
 		root.printHorizontal("", true);
 	}
+	
+	
+
 
 	public static void findFloorAndCeilinginBST() {
 		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(5, 10, 999);
