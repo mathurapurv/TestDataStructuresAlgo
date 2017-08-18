@@ -18,13 +18,14 @@ public class MainTreeRunner {
 //		 findMaxInBinaryTree();
 //		 levelOrderTreeTraversal();
 //		 findMaxandMinDepth();
-		tryPreOrderTreeTraversal();
+//		tryPreOrderTreeTraversal();
 //		 rootToLeafPaths();
 //		 mirrorTree(); 
 //		 pathFromRootToNode();
 //		levelOrderTreeTraversal();
 //		findLCAofTwoBSTNodes();
 //		createBSTFromSortedList();
+		findFloorAndCeilinginBST();
 		System.out.println("-- End --");
 
 	}
@@ -209,18 +210,21 @@ public class MainTreeRunner {
 
 
 	public static void findFloorAndCeilinginBST() {
-		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(5, 10, 999);
+		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(3, 10, 999);
 		root.printHorizontal("", true);
 		
 		// find a random node 
 		double markerValue =  (root.getRightNode().getLeftNode().getData()+root.getRightNode().getRightNode().getData())/2;
+		
+		System.out.println("markerValue : "+markerValue);
 		
 		TreeNode<Long> floor=null;
 		TreeNode<Long> ceiling=null;
 		
 		TreeUtility.identifyFloorAndCeiling(root , floor,ceiling ,markerValue);
 		
-		
+		System.out.println("floor : "+floor);
+		System.out.println("ceiling : "+ceiling);
 		
 	}
 	

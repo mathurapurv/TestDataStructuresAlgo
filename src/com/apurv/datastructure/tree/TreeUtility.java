@@ -280,64 +280,95 @@ public class TreeUtility {
 	 * @return
 	 */
 	public static TreeNode<Long> createBSTfromSortedList(List<Long> sortedNumberList) {
-		
 		if(sortedNumberList == null || sortedNumberList.isEmpty()) return null;
-		
 		int size = sortedNumberList.size();
-		
 		if(size==1){
 			return new TreeNode<>(sortedNumberList.get(0));
 		}
-		
 		if(size==3){
 			// we have reached smallest unit , no point using recursion anymore 
-			
-			
 			TreeNode<Long> rootNode = new TreeNode<>(sortedNumberList.get(1));
-			
 			rootNode.setLeftNode(new TreeNode<>(sortedNumberList.get(0)));
 			rootNode.setRightNode(new TreeNode<>(sortedNumberList.get(2)));
-			
 			return rootNode;
-			
 		}
 		
 		// find midpoint of sublist 
-		
-
-		
 		int midpoint;
-		
 		if(size%2!=0){
 			midpoint = (int)size/2;
 		}else{
 			midpoint = size/2 - 1; 
 		}
-		
 		System.out.println("size : "+ size + " , midpoint : "+ midpoint);
-		
-		
 		TreeNode<Long> rootNode = new TreeNode<>(sortedNumberList.get(midpoint));
-		
-		
-		
 		TreeNode<Long> leftNode = createBSTfromSortedList(sortedNumberList.subList(0, midpoint));
 		TreeNode<Long> rightNode = createBSTfromSortedList(sortedNumberList.subList(midpoint+1, size));
-		
 		rootNode.setLeftNode(leftNode);
 		rootNode.setRightNode(rightNode);
-		
-		
-		
-		
-		
-		
 		return rootNode;
 	}
 
+	/**
+	 * given a marker value , find 2 nodes which are just below and just above 
+	 * the marker value.
+	 * 
+	 * We need to find a set of parent - child node where the marker value falls 
+	 * between the values of these nodes
+	 * 
+	 * @param root
+	 * @param floor
+	 * @param ceiling
+	 * @param markerValue
+	 */
 	public static void identifyFloorAndCeiling(TreeNode<Long> root, TreeNode<Long> floor, TreeNode<Long> ceiling,
 			double markerValue) {
-		// TODO Auto-generated method stub
+		
+		// failsafe condition
+		if(root==null || root.isLeafNode() ) return ;
+		if(floor!=null   &&  ceiling!=null) return;
+		
+		
+		// if marker value lie between root and left node 
+		
+		if(
+				markerValue <= root.getData() &&
+				markerValue >= root.getLeftNode().getData()
+				){
+			ceiling=root;
+			floor=root.getLeftNode();
+			return;
+		}
+		
+		// if marker value lies between root and right node 
+		if(
+				markerValue >= root.getData() &&
+				markerValue <= root.getRightNode().getData()
+				){
+			ceiling=root.getRightNode();
+			floor=root;
+			return;
+			
+		}
+		
+		
+		// if marker value is more then right node
+		
+		if(markerValue >= root.getRightNode().getData()){
+			identifyFloorAndCeiling(root.getRightNode() , floor,ceiling ,markerValue);
+		}
+		
+		
+		// if marker value is less  then left node 
+		
+		
+		if(markerValue <= root.getLeftNode().getData()){
+			identifyFloorAndCeiling(root.getLeftNode() , floor,ceiling ,markerValue);
+		}
+		
+		
+		
+		
 		
 	}
 	
