@@ -1,6 +1,6 @@
 package com.apurv.datastructure.tree;
 
-public  class  TreeNode<T  extends  Comparable<T> > {
+public class TreeNode<T extends Comparable<T>> {
 
 	private T data;
 	private TreeNode<T> leftNode = null;
@@ -11,18 +11,20 @@ public  class  TreeNode<T  extends  Comparable<T> > {
 
 	public TreeNode() {
 	}
-	
-	public static  TreeNode getMarkerInstance(){return markerInstance;}
 
-	public TreeNode( T  data) {
+	public static TreeNode getMarkerInstance() {
+		return markerInstance;
+	}
+
+	public TreeNode(T data) {
 		this.data = data;
 	}
 
-	public  T  getData() {
+	public T getData() {
 		return data;
 	}
 
-	public void setData( T  data) {
+	public void setData(T data) {
 		this.data = data;
 	}
 
@@ -42,7 +44,6 @@ public  class  TreeNode<T  extends  Comparable<T> > {
 		this.rightNode = rightNode;
 	}
 
-
 	public void printHorizontal(String prefix, boolean isRoot) {
 		System.out.println(prefix + (isRoot ? "|__ " : "|-- ") + this.data);
 
@@ -57,10 +58,14 @@ public  class  TreeNode<T  extends  Comparable<T> > {
 	public boolean isLeafNode() {
 		return (rightNode == null) && (leftNode == null);
 	}
-	
-	public boolean leftNodeExist(){ return (leftNode!=null);}
-	
-	public boolean rightNodeExist(){ return (rightNode!=null);}
+
+	public boolean leftNodeExist() {
+		return (leftNode != null);
+	}
+
+	public boolean rightNodeExist() {
+		return (rightNode != null);
+	}
 
 	@Override
 	public String toString() {
@@ -70,8 +75,6 @@ public  class  TreeNode<T  extends  Comparable<T> > {
 	private String paddedDataValue() {
 		return String.format("%1$4s", data);
 	}
-	
-	
 
 	public int getMaxHeight() {
 
