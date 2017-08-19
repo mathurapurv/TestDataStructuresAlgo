@@ -2,8 +2,10 @@ package com.apurv.datastructure.tree;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class TreeUtility {
 
@@ -321,55 +323,50 @@ public class TreeUtility {
 	 * @param ceiling
 	 * @param markerValue
 	 */
-	public static void identifyFloorAndCeiling(TreeNode<Long> root, TreeNode<Long> floor, TreeNode<Long> ceiling,
-			double markerValue) {
+	public static void identifyFloorAndCeiling(TreeNode<Long> root, double markerValue) {
 		
 		// failsafe condition
 		if(root==null || root.isLeafNode() ) return ;
-		if(floor!=null   &&  ceiling!=null) return;
 		
-		
-		// if marker value lie between root and left node 
-		
-		if(
-				markerValue <= root.getData() &&
-				markerValue >= root.getLeftNode().getData()
-				){
-			ceiling=root;
-			floor=root.getLeftNode();
-			return;
-		}
-		
-		// if marker value lies between root and right node 
-		if(
-				markerValue >= root.getData() &&
-				markerValue <= root.getRightNode().getData()
-				){
-			ceiling=root.getRightNode();
-			floor=root;
-			return;
+	    final  String MARKERVALUE_KEY = "markerValue";
+	    final  String FLOOR_VALUE_KEY = "floor";
+	    final  String CIELING_VALUE_KEY = "cieling";
+	    
+		Map<String, Object> associatedData = new HashMap<String, Object>();
+		associatedData.put(MARKERVALUE_KEY , new Double(markerValue));
+
+		(new TreePreOrderTraversalHandler() {
 			
-		}
+			@Override
+			protected void processNode(TreeNode<Long> node, int level, Map<String, Object> associatedData) {
+				Double markerVal =  (Double)associatedData.get(MARKERVALUE_KEY);
+				Double floor = associatedData.containsKey(FLOOR_VALUE_KEY) ? ((TreeNode<Long>)associatedData.get(FLOOR_VALUE_KEY)).getData() : (-1*Double.MAX_VALUE);
+				Double cieling = associatedData.containsKey(CIELING_VALUE_KEY) ?  ((TreeNode<Long>)associatedData.get(CIELING_VALUE_KEY)).getData()  : Double.MAX_VALUE;
+				
+				Long nodeData = node.getData();
+//				System.out.println("floor : "+floor+" ,markerval : "+markerVal+" node : "+node+" , ceil : "+cieling);
+				//  currentFloor <<< nodedata <<<<  marker value : change floor to node data 
+				if(nodeData < markerVal  
+						&&
+						floor < nodeData
+						){
+					associatedData.put(FLOOR_VALUE_KEY , node);
+				}
+				// markervalue << nodedata  << currentcieling
+				if(markerVal < nodeData  
+						&&
+						nodeData < cieling
+						){
+					associatedData.put(CIELING_VALUE_KEY , node);
+				}
+			}
+		}).preOrderTreeTraversal(root, associatedData);
 		
 		
-		// if marker value is more then right node
-		
-		if(markerValue >= root.getRightNode().getData()){
-			identifyFloorAndCeiling(root.getRightNode() , floor,ceiling ,markerValue);
-		}
-		
-		
-		// if marker value is less  then left node 
-		
-		
-		if(markerValue <= root.getLeftNode().getData()){
-			identifyFloorAndCeiling(root.getLeftNode() , floor,ceiling ,markerValue);
-		}
-		
-		
-		
-		
-		
+		TreeNode<Long> floor = (TreeNode<Long>)associatedData.get(FLOOR_VALUE_KEY);
+		TreeNode<Long> ceiling = (TreeNode<Long>)associatedData.get(CIELING_VALUE_KEY);
+		System.out.println("floor : "+floor);
+		System.out.println("ceiling : "+ceiling);
 	}
 	
 	
