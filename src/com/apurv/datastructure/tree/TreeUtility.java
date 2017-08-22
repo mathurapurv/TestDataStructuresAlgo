@@ -369,7 +369,36 @@ public class TreeUtility {
 		System.out.println("ceiling : "+ceiling);
 	}
 	
-	
+	public static boolean isAVLTree(TreeNode root){
+		
+		if(root!=null){
+			
+			
+			if(root.isLeafNode())return true;
+			int leftHeight = 0;
+			if(root.leftNodeExist()){
+				leftHeight = root.getLeftNode().getMaxHeight();
+			}
+			int rightHeight = 0;
+			if(root.rightNodeExist()){
+				rightHeight = root.getRightNode().getMaxHeight();
+			}
+			
+			System.out.println("root : "+root+" leftHeight : "+leftHeight+"rightHeight :  "+rightHeight);
+			
+			if(  Math.abs(leftHeight - rightHeight)  > 1   ){
+				return false;
+			}else{
+				return TreeUtility.isAVLTree( root.getRightNode()) 
+						&&
+						TreeUtility.isAVLTree( root.getLeftNode());
+			}
+			
+			
+		}
+		
+		return false;
+	}
 	
 
 }

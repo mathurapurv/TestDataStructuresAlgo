@@ -10,7 +10,7 @@ import com.apurv.util.RandomGenerationUtils;
 
 public class MainTreeRunner {
 
-	public static void main(String[] args) {
+	public  static  void main(String[] args) {
 		System.out.println("-- Start --");
 //		createAndPrintTree();
 //		 searchInBinarySearchTree();
@@ -25,12 +25,15 @@ public class MainTreeRunner {
 //		levelOrderTreeTraversal();
 //		findLCAofTwoBSTNodes();
 //		createBSTFromSortedList();
-		findFloorAndCeilinginBST();
+//		findFloorAndCeilinginBST();
+		treerotationafterinsertion();
 		System.out.println("-- End --");
 
 	}
 
-	public static void createAndPrintTree() {
+
+
+	private static  void createAndPrintTree() {
 
 		// TreeNode node = createTreeForFixedHeight(3);
 		TreeNode<Integer> node = TreeCreationUtil.createBinarySearchTreeForFixedHeight(3, 100, 999);
@@ -39,7 +42,7 @@ public class MainTreeRunner {
 
 	}
 
-	public static void searchInBinarySearchTree() {
+	private static  void searchInBinarySearchTree() {
 		// create a BST and check if a particular number exists
 
 		TreeNode root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(4, 199, 999);
@@ -59,7 +62,7 @@ public class MainTreeRunner {
 
 	}
 
-	public static void insertInBinarySearchTree() {
+	private static  void insertInBinarySearchTree() {
 		TreeNode root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(3, 199, 999);
 		root.printHorizontal("", true);
 		long valueToInsert;
@@ -73,7 +76,7 @@ public class MainTreeRunner {
 	}
 
 	
-	public static void findMaxInBinaryTree() {
+	private static  void findMaxInBinaryTree() {
 		TreeNode<Long> root = TreeCreationUtil.createTreeForFixedHeight(5);
 		root.printHorizontal("", true);
 		Long maxValue = TreeUtility.findMaxValueInBinaryTree(root);
@@ -81,7 +84,7 @@ public class MainTreeRunner {
 		
 	}
 	
-	public static void levelOrderTreeTraversal(){
+	private static  void levelOrderTreeTraversal(){
 		TreeNode<Long> root = TreeCreationUtil.createTreeForFixedHeight(3);
 		root.printHorizontal("", true);
 		Map<String, Object> associatedData=new HashMap<String, Object>();
@@ -94,7 +97,7 @@ public class MainTreeRunner {
 		}).levelOrderTreeTraversal(root,associatedData);
 	}
 	
-	public static void findMaxandMinDepth(){
+	private static  void findMaxandMinDepth(){
 		
 		TreeNode<Long> root = TreeCreationUtil.createUnbalancedTreeWithRandomElements(70);
 		root.printHorizontal("", true);
@@ -121,7 +124,7 @@ public class MainTreeRunner {
 		System.out.println("Max depth of leaf : "+associatedData.get(MAXIMUM_DEPTH)  + " With data : "+associatedData.get(MAXIMUM_DEPTH_DATA));
 	} 
 	
-	public static void tryPreOrderTreeTraversal() {
+	private static  void tryPreOrderTreeTraversal() {
 		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(10, 10, 999);
 		root.printHorizontal("", true);
 		Map<String, Object> associatedData = new HashMap<String, Object>();
@@ -137,8 +140,6 @@ public class MainTreeRunner {
 			}
 		}).preOrderTreeTraversal(root, associatedData);
 		
-		
-		
 		for( Long l :  (List<Long>)associatedData.get("sortedNumberList")){
 			System.out.print(l+" --> ");
 		}
@@ -149,14 +150,14 @@ public class MainTreeRunner {
 	/**
 	 * print all root to leaf paths 
 	 */
-	public static void rootToLeafPaths(){
+	private static  void rootToLeafPaths(){
 		TreeNode<Long> root = TreeCreationUtil.createUnbalancedTreeWithRandomElements(100);
 		root.printHorizontal("", true);
 		List<String> paths =  TreeUtility.printRootToLeafPaths(root);
 		for(String path : paths)System.out.println(path);
 	}
 	
-	public static void mirrorTree(){
+	private static  void mirrorTree(){
 		TreeNode<Long> root = TreeCreationUtil.createUnbalancedTreeWithRandomElements(5);
 		root.printHorizontal("", true);
 		root = TreeUtility.createMirrorTree(root);
@@ -164,7 +165,7 @@ public class MainTreeRunner {
 		root.printHorizontal("", true);
 	}
 
-	public static void pathFromRootToNode() {
+	private static  void pathFromRootToNode() {
 
 		TreeNode<Long> root = TreeCreationUtil.createTreeForFixedHeight(2);
 		root.printHorizontal("", true);
@@ -180,7 +181,7 @@ public class MainTreeRunner {
 
 	}
 	
-	public static void findLCAofTwoBSTNodes() {
+	private static  void findLCAofTwoBSTNodes() {
 		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(5, 10, 999);
 		root.printHorizontal("", true);
 		
@@ -196,7 +197,7 @@ public class MainTreeRunner {
 		
 	}
 	
-	public static void createBSTFromSortedList() {
+	private static  void createBSTFromSortedList() {
 		int numberOfNodes=31;
 		List<Long> sortedNumberList = new ArrayList<Long>(numberOfNodes);
 		for (int i = 0; i < numberOfNodes; i++) {
@@ -206,7 +207,7 @@ public class MainTreeRunner {
 		root.printHorizontal("", true);
 	}
 	
-	public static void findFloorAndCeilinginBST() {
+	private static  void findFloorAndCeilinginBST() {
 		TreeNode<Long> root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(5, 10, 999);
 		root.printHorizontal("", true);
 		// find a random node 
@@ -219,5 +220,21 @@ public class MainTreeRunner {
 		TreeNode<Long> floor=new TreeNode<>();
 		TreeNode<Long> ceiling=new TreeNode<>();
 		TreeUtility.identifyFloorAndCeiling(root ,markerValue);
+	}
+	
+	private static void treerotationafterinsertion() {
+		
+		TreeNode root = TreeCreationUtil.createBinarySearchTreeForFixedHeight(3, 199, 999);
+		root.printHorizontal("", true);
+		long valueToInsert= RandomGenerationUtils.randomLong(3);;
+		System.out.println("TreeUtility.isAVLTree(root) : "+TreeUtility.isAVLTree(root));
+		for (int i = 0; i < 5; i++) {
+			valueToInsert++;
+			System.out.println("Value to insert : " + valueToInsert);
+			TreeUtility.insertValueInBST(root, valueToInsert);
+			root.printHorizontal("", true);
+			System.out.println("TreeUtility.isAVLTree(root) : "+TreeUtility.isAVLTree(root));
+			System.out.println("Max Height : " + root.getMaxHeight());
+		}
 	}
 }
